@@ -28,6 +28,7 @@ class BookRequest extends FormRequest
             'author' => 'required|string',
             'keywords' => 'required|string',
             'publication_year' => 'required|integer',
+            'category_id' => 'required|integer',
         ];
     }
 }

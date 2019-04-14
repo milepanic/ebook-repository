@@ -21,7 +21,12 @@ class CreateBooksTable extends Migration
             $table->integer('publication_year');
             $table->string('filename');
             $table->string('mime');
+            $table->unsignedInteger('category_id');
             $table->timestamps();
+
+            $table->foreign('category_id')
+                  ->references('id')->on('categories')
+                  ->onDelete('cascade');
         });
     }
 

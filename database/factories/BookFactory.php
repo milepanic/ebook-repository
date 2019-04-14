@@ -10,6 +10,7 @@ $factory->define(Book::class, function (Faker $faker) {
         'keywords' => $faker->bs,
         'publication_year' => $faker->year,
         'filename' => 'null',
-        'mime' => 'png'
+        'mime' => 'png',
+        'category_id' => $faker->numberBetween(1, 20),
     ];
 });

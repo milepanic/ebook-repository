@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Book;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use Illuminate\Http\Request;
 
-class BooksController
+class BookController extends Controller
 {
     public function index()
     {
-        return Book::all();
+        return Book::with('category')->get();
     }
 
-    public function store(BookRequest $request) 
+    public function store(Request $request) 
     {
         Book::create($request->all());
 
@@ -22,10 +23,10 @@ class BooksController
 
     public function show(Book $book) 
     {
-        return $book;
+        return $book->load('category');
     }
 
-    public function update(Book $book, Request $request) 
+    public function update(Request $request, Book $book) 
     {
         $book->update($request->all());
 
