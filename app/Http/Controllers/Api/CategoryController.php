@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index', 'show']);
+        $this->middleware(['jwt.auth', 'jwt.refresh'])->except(['index', 'show']);
     }
 
     public function index() 
