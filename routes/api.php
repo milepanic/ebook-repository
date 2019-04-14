@@ -18,17 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('Api')->group(function () {
-    Route::get('books', 'BookController@index');
-    Route::post('books', 'BookController@store');
-    Route::get('books/{book}', 'BookController@show');
-    Route::put('books/{book}', 'BookController@update');
-    Route::delete('books/{book}', 'BookController@destroy');
+    Route::apiResource('books', 'BookController');
 
-    Route::get('categories', 'CategoryController@index');
-    Route::post('categories', 'CategoryController@store');
-    Route::get('categories/{category}', 'CategoryController@show');
-    Route::put('categories/{category}', 'CategoryController@update');
-    Route::delete('categories/{category}', 'CategoryController@destroy');
+    Route::apiResource('categories', 'CategoryController');
 });
 
 Route::fallback(function () {
