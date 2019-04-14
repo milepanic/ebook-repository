@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::fallback(function () {
+    return response()->json(['message' => 'Not Found.'], 404);
 });
