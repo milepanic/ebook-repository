@@ -25,6 +25,8 @@ Route::namespace('Api')->group(function () {
     Route::apiResource('books', 'BookController');
 
     Route::apiResource('categories', 'CategoryController');
+
+    Route::apiResource('users', 'UserController');
 });
 
 Route::fallback(function () {
