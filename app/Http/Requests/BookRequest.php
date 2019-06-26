@@ -26,9 +26,10 @@ class BookRequest extends FormRequest
         return [
             'title' => 'required|string',
             'author' => 'required|string',
-            'keywords' => 'required|string',
+            'keywords' => 'nullable|string',
             'publication_year' => 'required|integer',
-            'category_id' => 'required|integer',
+            'category_id' => 'nullable|integer',
+            'file' => 'nullable|mimes:pdf'
         ];
     }
 }

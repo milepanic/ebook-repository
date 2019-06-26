@@ -26,9 +26,20 @@ class BookController extends Controller
         );
     }
 
-    public function store(Request $request) 
+    public function store(BookRequest $request) 
     {
-        Book::create($request->all());
+        $book = Book::create(
+            array_merge(
+                $request->except('file'), [
+                    'filename' => $request->file->getClientOriginalName(),
+                    'mime' => $request->file->getClientMimeType()
+                ]
+            )
+        );
+
+        $this->fileService->upload(
+            $request->file, "books/$book->id/", $request->file->getClientOriginalName(), true
+        );
 
         return response()->json('Success!', 201);
     }
@@ -38,22 +49,24 @@ class BookController extends Controller
         return new BookResource($book->load('category'));
     }
 
-    public function update(Request $request, Book $book) 
+    public function update(BookRequest $request, Book $book) 
     {
         if ($request->hasFile('file')) {
-            array_merge(
-                $request->except('file'), [
-                    'filename' => $request->file->getClientOriginalName(),
-                    'mime' => $request->file->getClientOriginalExtension()
-                ]
+            $book->update(
+                array_merge(
+                    $request->except('file'), [
+                        'filename' => $request->file->getClientOriginalName(),
+                        'mime' => $request->file->getClientMimeType()
+                    ]
+                )
             );
 
             $this->fileService->upload(
                 $request->file, "books/$book->id/", $request->file->getClientOriginalName(), true
             );
+        } else {
+            $book->update($request->except('file'));
         }
-
-        $book->update($request->except('file'));
 
         return response()->json('Success!', 200);
     }
