@@ -19,8 +19,8 @@ class CreateBooksTable extends Migration
             $table->string('author');
             $table->text('keywords');
             $table->integer('publication_year');
-            $table->string('filename');
-            $table->string('mime');
+            $table->string('filename')->nullable();
+            $table->string('mime')->nullable();
             $table->unsignedInteger('category_id');
             $table->timestamps();
 

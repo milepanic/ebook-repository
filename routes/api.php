@@ -22,7 +22,9 @@ Route::namespace('Api')->group(function () {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     
-    Route::apiResource('books', 'BookController');
+    Route::apiResource('books', 'BookController')->except('update');
+    Route::post('books/update/{book}', 'BookController@update')->name('books.update');
+    Route::get('books/{book}/download', 'BookController@download')->name('books.download');
 
     Route::apiResource('categories', 'CategoryController');
 
