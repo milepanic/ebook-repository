@@ -29,6 +29,8 @@ Route::namespace('Api')->group(function () {
     Route::apiResource('categories', 'CategoryController');
 
     Route::apiResource('users', 'UserController');
+
+    Route::get('search', 'BookSearchController@search');
 });
 
 Route::fallback(function () {
